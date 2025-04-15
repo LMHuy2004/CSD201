@@ -13,50 +13,56 @@ import java.util.Scanner;
  * @author l26m1
  */
 public class MyList {
+
     Node head;
 
     public MyList() {
         this.head = null;
     }
-    
+
     public boolean isEmpty() {
 //        if (this.head == null)
 //            return true;
 //        else
 //            return false;
+
         return this.head == null;
     }
-    
+
     public void clear() {
         this.head = null;
     }
-    
+
     public void traverse() {
         Node p = head;
-        while (p!=null) {
+        while (p != null) {
             System.out.print(p.info);
             System.out.print(" ");
             p = p.next;
         }
     }
-    
+
     void loadData(int k) {
         Random generator = new Random();
         for (int i = 0; i < k; i++) {
-            int number = generator.nextInt(1000)+1;
+            int number = generator.nextInt(1000) + 1;
             // add into list
-            addFirst(number);
+            addLast(number);
         }
     }
-    
+
     public void addFirst(int n) {
+        //------ Start your code here---------------------------------------------------------
         Node newNode = new Node(n);
         // addFirst
         newNode.next = head;
         head = newNode;
+
+        //------ End your code here-----------------------------------------------------------
     }
-    
+
     public void addLast(int n) {
+        //------ Start your code here---------------------------------------------------------
         Node newNode = new Node(n);
         // addLast
         // Case 1: if list is empty, make the new node as head
@@ -65,66 +71,69 @@ public class MyList {
             return;
         }
         // Case 2: if list is not empty
+        // Duyệt từ đầu tới cuối
         Node last = head;
-        while(last.next!=null){
+        while (last.next != null) {
             last = last.next;
         }
         // add the new node at the end
         last.next = newNode;
+        //------ End your code here-----------------------------------------------------------
     }
-    
+
     void f1() {
         System.out.println("Linked List: ");
         this.traverse();
     }
-    
+
     // f2: nhap du lieu mot con so tu ban phim => addLast
     void f2() {
         System.out.println("Before: ");
         this.traverse();
-        
+        //------ Start your code here---------------------------------------------------------
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a value to add at the end: ");
+        System.out.print("Enter a value to add at the end:");
         int value = sc.nextInt();
         addLast(value);
-        
+        //------ End your code here-----------------------------------------------------------
         System.out.println("After: ");
         this.traverse();
     }
-    
-    // f3: ham addPos ==> them node  vao vi tri thu k,
+
+    // f3: ham addPos ==> them node vao vi tri thu k, 
     // trong do node moi va chi so k duoc nhap tu ban phim
     void f3() {
         System.out.println("Before: ");
         this.traverse();
-        
+        //------ Start your code here---------------------------------------------------------
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter a value: ");
+        System.out.print("Enter a value:");
         int value = sc.nextInt();
         System.out.println("Enter position k (0-based index): ");
         int k = sc.nextInt();
-        
+
         // Special case for head
-        if (k==0) {
+        if (k == 0) {
             addFirst(value);
-        }else{
+        } else {
             // Find the node at position k-1
-        Node current = head;
-        int currentIndex = 0;
-        while(currentIndex < k-1 && current != null) {
-            current = current.next;
-            currentIndex++;
+            Node curent = head;
+            int currentIndex = 0;
+            while (currentIndex < k - 1 && curent != null) {
+                curent = curent.next;
+                currentIndex++;
+            }
+            // Insert the new node
+            Node newNode = new Node(value);
+            newNode.next = curent.next;
+            curent.next = newNode;
         }
-        // Insert the new node
-        Node newNode = new Node(value);
-        newNode.next = current.next;
-        current.next = newNode;
-        
+        //------ End your code here-----------------------------------------------------------
         System.out.println("After: ");
         this.traverse();
-        }
+
     }
-    
+
     // f4: removeFirst
     void f4() {
         System.out.print("Before:   ");
@@ -133,7 +142,6 @@ public class MyList {
         //------ Start your code here---------------------------------------------------------
         if (head != null) {
             head = head.next;
-            
         }
         //------ End your code here-----------------------------------------------------------
         System.out.print("After:    ");
@@ -145,14 +153,14 @@ public class MyList {
         System.out.print("Before:   ");
         this.traverse();
         //------ Start your code here---------------------------------------------------------
-        if (head!=null){
-            // if there is only one element
-            if(head.next==null){
+        if (head != null) {
+            // If there is only one element
+            if (head.next == null) {
                 head = null;
-            }else{
-                //find the second last node
+            } else {
+                // find the second last node
                 Node secondLast = head;
-                while(secondLast.next.next != null){
+                while (secondLast.next.next != null) {
                     secondLast = secondLast.next;
                 }
                 // remove last node

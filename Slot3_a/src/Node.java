@@ -9,6 +9,7 @@
  * @author l26m1
  */
 public class Node {
+    
     int info;
     Node next;
 
