@@ -13,26 +13,26 @@ import java.util.Scanner;
  * @author l26m1
  */
 public class MyList {
-
+    
     Node head, tail;
     int size;
-
+    
     public MyList() {
         this.head = null;
         this.tail = null;
         this.size = 0;
     }
-
+    
     public boolean isEmpty() {
         return this.size == 0;
     }
-
+    
     public void clear() {
         this.head = null;
         this.head = null;
         this.size = 0;
     }
-
+    
     void traverse() {
         Node p = head;
         while (p != null) {
@@ -40,7 +40,7 @@ public class MyList {
             p = p.next;
         }
     }
-
+    
     void ftraverse(RandomAccessFile f) throws Exception {
         Node p = head;
         while (p != null) {
@@ -49,7 +49,7 @@ public class MyList {
         }
         f.writeBytes("\r\n"); // \r thục vào đầu dòng
     }
-
+    
     void loadData(int k) { // k: là dòng thứ k trong file
         String[] a = Lib.readLineToStrArray("data.txt", k);
         int n = a.length;
@@ -58,25 +58,23 @@ public class MyList {
             addLast(number);
         }
     }
-
+    
     void addFirst(int n) {
         Node newNode = new Node(n);
-        if (head == null) {
-//            head = newNode;
-//            tail = newNode;
-            head = tail = newNode;
-        } else {
+        if(head==null){
+            head = tail = null;
+        }else{
             newNode.next = head;
             head = newNode;
         }
         size++;
     }
-
+    
     void addLast(int n) {
         Node newNode = new Node(n);
-        if (head == null) {
-            head = tail = newNode;
-        } else {
+        if (head==null){
+            head = tail = null;
+        }else{
             tail.next = newNode;
             tail = tail.next;
         }
@@ -111,7 +109,7 @@ public class MyList {
         //------------------------------------------------------------------------------------
         //------ Start your code here---------------------------------------------------------
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a value to add first: ");
+        System.out.println("Enter a value to add first: ");
         int value = sc.nextInt();
         addFirst(value);
         //------ End your code here-----------------------------------------------------------
@@ -134,23 +132,22 @@ public class MyList {
         //------------------------------------------------------------------------------------
         //------ Start your code here---------------------------------------------------------
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter a value to add: ");
+        System.out.println("Enter a value to add: ");
         int value = sc.nextInt();
-        System.out.print("Enter position to add (0 to " + size + "): ");
+        System.out.println("Enter position to add (0 to " + size + "): ");
         int k = sc.nextInt();
-
-        if (k == 0) {
+        
+        if(k==0){
             addFirst(value);
-        } else if (k == size) {
+        }else if(k==size){
             addLast(value);
-        } else {
+        }else{
             Node newNode = new Node(value);
             Node p = head;
-            // Traverse to the node before position k
+            
             for (int i = 0; i < k-1; i++) {
                 p = p.next;
             }
-            // Insert the new node
             newNode.next = p.next;
             p.next = newNode;
             size++;
@@ -176,8 +173,8 @@ public class MyList {
         //------ Start your code here---------------------------------------------------------
         if(!isEmpty()){
             head = head.next;
-            if(head == null){
-                tail = null;
+            if(head==null){
+                tail=null;
             }
             size--;
         }
@@ -202,10 +199,9 @@ public class MyList {
         if(!isEmpty()){
             if(size==1){
                 head = tail = null;
-                size = 0;
+                size=0;
             }else{
                 Node p = head;
-                // find the node before the tail
                 for (int i = 0; i < size-2; i++) {
                     p = p.next;
                 }
